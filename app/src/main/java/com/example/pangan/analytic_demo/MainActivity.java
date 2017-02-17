@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.gms.appindexing.Action;
@@ -29,8 +30,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void doSum(View v) {
-        TextView t = (TextView) findViewById(R.id.textView3);
-        t.setText("HELLOW");
+        EditText edit_text_1 = (EditText) findViewById(R.id.editText1);
+        EditText edit_text_2 = (EditText) findViewById(R.id.editText2);
+        int number_1 = Integer.parseInt(edit_text_1.getText().toString());
+        int number_2 = Integer.parseInt(edit_text_2.getText().toString());
+        int number_3 = number_1 + number_2;
+        TextView text_view_3 = (TextView) findViewById(R.id.textView3);
+
+        text_view_3.setText(String.valueOf(number_3));
 
         // R.layout.activity_main.textView4.text = "Hello";
 
