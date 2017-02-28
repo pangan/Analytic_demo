@@ -1,5 +1,7 @@
 package com.example.pangan.analytic_demo;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -47,6 +49,24 @@ public class MainActivity extends AppCompatActivity {
         // R.layout.activity_main.textView4.text = "Hello";
 
     }
+
+    public void GatherStaticsAndSend(View v){
+        /**
+         * This method is for gathering statics and send them to the server
+         */
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle("Alert");
+        alertDialog.setMessage("Alert message to be shown");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
+
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
