@@ -1,4 +1,4 @@
-package com.example.pangan.analytic_demo;
+package com.example.analyticlib;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -20,6 +20,7 @@ public class ExampleInstrumentedTest {
     public void useAppContext() throws Exception {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
-        assertEquals("com.example.pangan.analytic_demo", appContext.getPackageName());
+
+        assertEquals("com.example.analyticlib.test", appContext.getPackageName());
     }
 }

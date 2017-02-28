@@ -12,6 +12,9 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+
+import com.example.analyticlib.*;
+
 public class MainActivity extends AppCompatActivity {
 
     /**
@@ -34,7 +37,9 @@ public class MainActivity extends AppCompatActivity {
         EditText edit_text_2 = (EditText) findViewById(R.id.editText2);
         int number_1 = Integer.parseInt(edit_text_1.getText().toString());
         int number_2 = Integer.parseInt(edit_text_2.getText().toString());
-        int number_3 = number_1 + number_2;
+        MainLibClass MySum = new MainLibClass();
+        int number_3 = MySum.MyTestMethod(number_1, number_2);
+
         TextView text_view_3 = (TextView) findViewById(R.id.textView3);
 
         text_view_3.setText(String.valueOf(number_3));
