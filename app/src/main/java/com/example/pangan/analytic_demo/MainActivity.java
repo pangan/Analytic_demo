@@ -54,9 +54,18 @@ public class MainActivity extends AppCompatActivity {
         /**
          * This method is for gathering statics and send them to the server
          */
+        MainLibClass Statics = new MainLibClass();
+        if (Statics.SendStatics()==0) {
+            ShowAlert("Statistics are sent!");
+        }
+
+
+    }
+
+    private void ShowAlert(String message){
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
         alertDialog.setTitle("Alert");
-        alertDialog.setMessage("Alert message to be shown");
+        alertDialog.setMessage(message);
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -65,8 +74,6 @@ public class MainActivity extends AppCompatActivity {
                 });
         alertDialog.show();
     }
-
-
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
