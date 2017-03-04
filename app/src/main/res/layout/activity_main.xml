@@ -12,77 +12,24 @@
 
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Second Number :"
-        android:layout_alignBaseline="@+id/editText2"
-        android:layout_alignBottom="@+id/editText2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/textView2" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberSigned"
-        android:ems="10"
-        android:id="@+id/editText2"
-        android:text="0"
-        android:layout_below="@+id/editText1"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberSigned"
-        android:ems="10"
-        android:id="@+id/editText1"
-        android:text="0"
-        android:layout_alignBaseline="@+id/textView1"
-        android:layout_alignBottom="@+id/textView1"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="First Number :"
-        android:id="@+id/textView1"
-        android:layout_marginTop="64dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
         android:id="@+id/textView3"
-        android:layout_below="@+id/button1"/>
-
-    <Button
-        android:text="SUM"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="49dp"
-        android:id="@+id/button1"
-        android:layout_below="@+id/editText2"
-        android:layout_toRightOf="@+id/textView1"
-        android:layout_toEndOf="@+id/textView1"
-        android:onClick="doSum" />
+        android:layout_below="@+id/button1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:text="Send Statics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/button1"
-        android:layout_toRightOf="@+id/button1"
-        android:layout_toEndOf="@+id/button1"
-        android:layout_marginLeft="33dp"
-        android:layout_marginStart="33dp"
         android:id="@+id/button"
-        android:onClick="GatherStaticsAndSend" />
+        android:onClick="GatherStaticsAndSend"
+        android:layout_below="@+id/editText2"
+        android:layout_alignRight="@+id/button1"
+        android:layout_alignEnd="@+id/button1"
+        android:layout_marginTop="13dp" />
 
 </RelativeLayout>

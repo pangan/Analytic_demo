@@ -3,19 +3,16 @@ package com.example.pangan.analytic_demo;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.analyticlib.MainLibClass;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
-
-
-import com.example.analyticlib.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,29 +31,17 @@ public class MainActivity extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    public void doSum(View v) {
-        EditText edit_text_1 = (EditText) findViewById(R.id.editText1);
-        EditText edit_text_2 = (EditText) findViewById(R.id.editText2);
-        int number_1 = Integer.parseInt(edit_text_1.getText().toString());
-        int number_2 = Integer.parseInt(edit_text_2.getText().toString());
-        MainLibClass MySum = new MainLibClass();
-        int number_3 = MySum.MyTestMethod(number_1, number_2);
-
-        TextView text_view_3 = (TextView) findViewById(R.id.textView3);
-
-        text_view_3.setText(String.valueOf(number_3));
-
-        // R.layout.activity_main.textView4.text = "Hello";
-
-    }
+    
 
     public void GatherStaticsAndSend(View v){
         /**
          * This method is for gathering statics and send them to the server
          */
-        MainLibClass Statics = new MainLibClass();
+        MainLibClass Statics = new MainLibClass(this.getClass());
         if (Statics.SendStatics()==0) {
             ShowAlert("Statistics are sent!");
+            TextView text_view_3 = (TextView) findViewById(R.id.textView3);
+            text_view_3.setText(Statics.GetStaticData());
         }
 
 
