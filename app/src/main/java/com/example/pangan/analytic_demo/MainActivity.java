@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    
+
 
     public void GatherStaticsAndSend(View v){
         /**

@@ -42,6 +42,8 @@ public class MainLibClass {
 
     private String GetDevice(){
         String ret_device = GetXMLTag("manufacturer", Build.MANUFACTURER);
+        ret_device += GetXMLTag("model", Build.MODEL);
+        
         return ret_device;
     }
 
