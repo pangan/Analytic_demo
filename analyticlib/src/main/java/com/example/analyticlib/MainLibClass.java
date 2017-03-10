@@ -3,6 +3,9 @@ package com.example.analyticlib;
 
 import android.os.Build;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by pangan on 28/02/2017.
  *
@@ -47,28 +50,35 @@ public class MainLibClass {
         return 0;
     }
 
-    public String GetStaticData(){
-        String ret_static = GetXMLTag("app_name", GetAppName());
-        ret_static += GetXMLTag("start_time", StartTime.toString());
-        ret_static += GetXMLTag("device", GetDevice());
-        return ret_static;
-    }
 
-    private String GetXMLTag(String tag_name, String value){
-        return String.format("<%s>%s</%s>", tag_name, value, tag_name);
-    }
     private String GetAppName(){
         String cm = ParentClass.getPackage().getName();
         return cm.toString();
 
     }
 
-    private String GetDevice(){
-        String ret_device = GetXMLTag("manufacturer", Build.MANUFACTURER);
-        ret_device += GetXMLTag("model", Build.MODEL);
-
-        return ret_device;
+    public JSONObject GetStaticData(){
+        JSONObject jo = new JSONObject();
+        try {
+            jo.put("app_name", GetAppName());
+            jo.put("start_time", StartTime.toString());
+            jo.put("device", GetDevice());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jo;
     }
 
+    private JSONObject GetDevice(){
+        JSONObject jo = new JSONObject();
+        try {
+            jo.put("manufactorer", Build.MANUFACTURER);
+            jo.put("model", Build.MODEL);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jo;
+    }
 
 }

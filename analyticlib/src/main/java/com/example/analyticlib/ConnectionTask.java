@@ -2,6 +2,8 @@ package com.example.analyticlib;
 
 import android.os.AsyncTask;
 
+import org.json.JSONObject;
+
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -12,17 +14,18 @@ import java.net.URL;
  * Created by pangan on 09/03/2017.
  */
 
-class ConnectionTask extends AsyncTask<String, Void, Void> {
+class ConnectionTask extends AsyncTask<Object, Void, Void> {
 
     @Override
-    protected Void doInBackground(String... params) {
-        String requestedurl = params[0];
-        String dataToSend = params[1];
+    protected Void doInBackground(Object... params) {
+
+        String requesturl = (String)params[0];
+        JSONObject dataToSend = (JSONObject)params[1];
         int rescode = 0;
 
         URL url=null;
         try {
-            url = new URL(requestedurl);
+            url = new URL(requesturl);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -37,7 +40,7 @@ class ConnectionTask extends AsyncTask<String, Void, Void> {
             conn.setRequestMethod("PUT");
             conn.setDoOutput(true);
             OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
-            out.write(dataToSend);
+            out.write(dataToSend.toString());
             out.close();
             in = conn.getInputStream();
 
@@ -53,22 +56,7 @@ class ConnectionTask extends AsyncTask<String, Void, Void> {
         } catch (Exception e) {
 
         }
-
-/*
-        try {
-            URL url = new URL("http://127.0.0.1:8080/amirone/api/hello");
-            HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
-            //httpCon.setDoOutput(true);
-            httpCon.setRequestMethod("PUT");
-            OutputStreamWriter out = new OutputStreamWriter(
-                    httpCon.getOutputStream());
-            out.write("Resource content");
-            out.close();
-            httpCon.getInputStream();
-            //httpCon.getResponseCode();
-        } catch(Exception e) {
-            throw new RuntimeException(e);
-        }*/
+        
         return null;
     }
 

@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         if (rescode>=0) {
             ShowAlert("Statistics are sent!"+rescode);
             TextView text_view_3 = (TextView) findViewById(R.id.textView3);
-            text_view_3.setText(Statics.GetStaticData());
+            text_view_3.setText(Statics.GetStaticData().toString());
         }
 
 
