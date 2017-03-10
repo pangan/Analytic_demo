@@ -21,6 +21,29 @@ public class MainLibClass {
     }
 
     public int SendStatics(){
+        /*int rescode = 0;
+        try {
+            URL url = new URL("http://localhost:8080/amirone/api/hello");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoOutput(true);
+            connection.setInstanceFollowRedirects(false);
+            connection.setRequestMethod("PUT");
+           // connection.setRequestProperty("Content-Type", "application/xml");
+
+            OutputStream os = connection.getOutputStream();
+            os.write(2);
+            os.flush();
+            //jaxbContext.createMarshaller().marshal("test", os);
+            //os.flush();
+
+            rescode = connection.getResponseCode();
+            connection.disconnect();
+        } catch(Exception e) {
+            throw new RuntimeException(e);
+        }
+        return rescode;*/
+
+        new ConnectionTask().execute("http://10.1.1.6:8080/amirone/api/hello", GetStaticData());
         return 0;
     }
 
@@ -43,7 +66,7 @@ public class MainLibClass {
     private String GetDevice(){
         String ret_device = GetXMLTag("manufacturer", Build.MANUFACTURER);
         ret_device += GetXMLTag("model", Build.MODEL);
-        
+
         return ret_device;
     }
 

@@ -38,8 +38,9 @@ public class MainActivity extends AppCompatActivity {
          * This method is for gathering statics and send them to the server
          */
         MainLibClass Statics = new MainLibClass(this.getClass());
-        if (Statics.SendStatics()==0) {
-            ShowAlert("Statistics are sent!");
+        int rescode = Statics.SendStatics();
+        if (rescode>=0) {
+            ShowAlert("Statistics are sent!"+rescode);
             TextView text_view_3 = (TextView) findViewById(R.id.textView3);
             text_view_3.setText(Statics.GetStaticData());
         }
