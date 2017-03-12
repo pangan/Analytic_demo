@@ -56,7 +56,7 @@ class ConnectionTask extends AsyncTask<Object, Void, Void> {
         } catch (Exception e) {
 
         }
-        
+
         return null;
     }
 

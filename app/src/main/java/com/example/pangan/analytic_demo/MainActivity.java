@@ -85,15 +85,22 @@ public class MainActivity extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
         AppIndex.AppIndexApi.start(client, getIndexApiAction());
+
+
+        MainLibClass Statics = new MainLibClass(this.getClass());
+        Statics.SendStatics();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-
+        MainLibClass Statics = new MainLibClass(this.getClass());
+        Statics.SendStatics();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
+
+
     }
 }

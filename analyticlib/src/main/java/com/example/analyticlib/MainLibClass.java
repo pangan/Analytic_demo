@@ -74,11 +74,14 @@ public class MainLibClass {
         try {
             jo.put("manufactorer", Build.MANUFACTURER);
             jo.put("model", Build.MODEL);
+            jo.put("os", Build.VERSION.RELEASE);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return jo;
     }
+
+
 
 }
