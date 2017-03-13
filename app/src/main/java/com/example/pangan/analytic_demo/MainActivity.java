@@ -1,12 +1,14 @@
 package com.example.pangan.analytic_demo;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.analyticlib.MainLibClass;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
@@ -29,18 +31,34 @@ public class MainActivity extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    public void doSum(View v) {
-        EditText edit_text_1 = (EditText) findViewById(R.id.editText1);
-        EditText edit_text_2 = (EditText) findViewById(R.id.editText2);
-        int number_1 = Integer.parseInt(edit_text_1.getText().toString());
-        int number_2 = Integer.parseInt(edit_text_2.getText().toString());
-        int number_3 = number_1 + number_2;
-        TextView text_view_3 = (TextView) findViewById(R.id.textView3);
 
-        text_view_3.setText(String.valueOf(number_3));
 
-        // R.layout.activity_main.textView4.text = "Hello";
+    public void GatherStaticsAndSend(View v){
+        /**
+         * This method is for gathering statics and send them to the server
+         */
+        MainLibClass Statics = MainLibClass.get();
+        int rescode = Statics.SendStatics();
+        if (rescode>=0) {
+            ShowAlert("Statistics are sent!"+rescode);
+            TextView text_view_3 = (TextView) findViewById(R.id.textView3);
+            text_view_3.setText(Statics.GetStaticData().toString());
+        }
 
+
+    }
+
+    private void ShowAlert(String message){
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle("Alert");
+        alertDialog.setMessage(message);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 
     /**
@@ -67,15 +85,22 @@ public class MainActivity extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
         AppIndex.AppIndexApi.start(client, getIndexApiAction());
+
+
+        MainLibClass Statics = new MainLibClass();
+        Statics.init(this);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-
+        MainLibClass Statics =  MainLibClass.get();
+        Statics.SendStatics();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
+
+
     }
 }
