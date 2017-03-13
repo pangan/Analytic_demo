@@ -25,9 +25,6 @@ public class MainLibClass {
         StartTime = System.currentTimeMillis();
     }
 
-    public int MyTestMethod(int num_1, int num_2){
-        return num_1+num_2;
-    }
 
     public int SendStatics(){
 
@@ -57,14 +54,14 @@ public class MainLibClass {
             jo.put("application", GetAppInfo());
             jo.put("start_time", StartTime);
             jo.put("end_time", System.currentTimeMillis());
-            jo.put("device", GetDevice());
+            jo.put("device", GetDeviceInfo());
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return jo;
     }
 
-    private JSONObject GetDevice(){
+    private JSONObject GetDeviceInfo(){
         JSONObject jo = new JSONObject();
         try {
             jo.put("manufactorer", Build.MANUFACTURER);
