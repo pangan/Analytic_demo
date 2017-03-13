@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         /**
          * This method is for gathering statics and send them to the server
          */
-        MainLibClass Statics = new MainLibClass(this.getClass());
+        MainLibClass Statics = MainLibClass.get();
         int rescode = Statics.SendStatics();
         if (rescode>=0) {
             ShowAlert("Statistics are sent!"+rescode);
@@ -87,14 +87,14 @@ public class MainActivity extends AppCompatActivity {
         AppIndex.AppIndexApi.start(client, getIndexApiAction());
 
 
-        MainLibClass Statics = new MainLibClass(this.getClass());
-        Statics.SendStatics();
+        MainLibClass Statics = new MainLibClass();
+        Statics.init(getClass());
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        MainLibClass Statics = new MainLibClass(this.getClass());
+        MainLibClass Statics =  MainLibClass.get();
         Statics.SendStatics();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.

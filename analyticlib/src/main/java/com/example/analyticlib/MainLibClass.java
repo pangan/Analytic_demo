@@ -12,9 +12,13 @@ import org.json.JSONObject;
  */
 
 public class MainLibClass {
-    private Class ParentClass;
-    private Long StartTime;
-    public MainLibClass(Class pClass){
+
+    private static Long StartTime;
+    private static Class ParentClass;
+
+    private static MainLibClass self = new MainLibClass();
+    public static MainLibClass get() { return self; }
+    public void init(Class pClass){
         ParentClass = pClass;
         StartTime = System.currentTimeMillis();
     }
@@ -24,27 +28,6 @@ public class MainLibClass {
     }
 
     public int SendStatics(){
-        /*int rescode = 0;
-        try {
-            URL url = new URL("http://localhost:8080/amirone/api/hello");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoOutput(true);
-            connection.setInstanceFollowRedirects(false);
-            connection.setRequestMethod("PUT");
-           // connection.setRequestProperty("Content-Type", "application/xml");
-
-            OutputStream os = connection.getOutputStream();
-            os.write(2);
-            os.flush();
-            //jaxbContext.createMarshaller().marshal("test", os);
-            //os.flush();
-
-            rescode = connection.getResponseCode();
-            connection.disconnect();
-        } catch(Exception e) {
-            throw new RuntimeException(e);
-        }
-        return rescode;*/
 
         new ConnectionTask().execute("http://10.1.1.6:8080/amirone/api/hello", GetStaticData());
         return 0;
@@ -61,7 +44,9 @@ public class MainLibClass {
         JSONObject jo = new JSONObject();
         try {
             jo.put("app_name", GetAppName());
-            jo.put("start_time", StartTime.toString());
+            jo.put("app_ver", ParentClass.getPackage().getImplementationVersion());
+            jo.put("start_time", StartTime);
+            jo.put("end_time", System.currentTimeMillis());
             jo.put("device", GetDevice());
         } catch (JSONException e) {
             e.printStackTrace();
