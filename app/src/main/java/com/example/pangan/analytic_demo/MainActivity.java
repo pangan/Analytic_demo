@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         MainLibClass Statics = new MainLibClass();
-        Statics.init(getClass());
+        Statics.init(this);
     }
 
     @Override

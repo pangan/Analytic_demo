@@ -1,6 +1,8 @@
 package com.example.analyticlib;
 
 
+import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.os.Build;
 
 import org.json.JSONException;
@@ -14,12 +16,12 @@ import org.json.JSONObject;
 public class MainLibClass {
 
     private static Long StartTime;
-    private static Class ParentClass;
+    private static Context ParentContext;
 
     private static MainLibClass self = new MainLibClass();
     public static MainLibClass get() { return self; }
-    public void init(Class pClass){
-        ParentClass = pClass;
+    public void init(Context pContext){
+        ParentContext = pContext;
         StartTime = System.currentTimeMillis();
     }
 
@@ -34,17 +36,25 @@ public class MainLibClass {
     }
 
 
-    private String GetAppName(){
-        String cm = ParentClass.getPackage().getName();
-        return cm.toString();
+    private JSONObject GetAppInfo(){
+        JSONObject jo = new JSONObject();
+        try {
+            PackageInfo pInfo = ParentContext.getPackageManager().getPackageInfo(
+                    ParentContext.getPackageName(), 0);
+            jo.put("name", ParentContext.getPackageName());
+            jo.put("version", pInfo.versionName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return jo;
 
     }
 
     public JSONObject GetStaticData(){
+
         JSONObject jo = new JSONObject();
         try {
-            jo.put("app_name", GetAppName());
-            jo.put("app_ver", ParentClass.getPackage().getImplementationVersion());
+            jo.put("application", GetAppInfo());
             jo.put("start_time", StartTime);
             jo.put("end_time", System.currentTimeMillis());
             jo.put("device", GetDevice());
